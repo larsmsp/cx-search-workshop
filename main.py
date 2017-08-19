@@ -14,7 +14,7 @@ def hello_world():
     """
     :return: "Hello, world!" til de som besøker siden. 
     """
-    return ""
+    return "Hello, World! This is a search engine for Computas.com!"
 
 
 @app.route('/calculator', methods=['GET'])
@@ -25,13 +25,25 @@ def calculator():
     Endepunktet skal støtte "plus", "minus", "mult" og "div".
     :return: Resultatet av enkle heltallsoperasjoner.
     """
-    operand1 = int(request.args['operand1'])
-    operand2 = int(request.args['operand2'])
-    operator = request.args['operator']
-    result = 0
-    # Kode for å gjøre riktig operasjon.
-    return "Resultatet er {0}".format(result)
+    try:
+        operand1 = int(request.args['operand1'])
+        operand2 = int(request.args['operand2'])
+        operator = request.args['operator']
+        return _do_math(operator, operand1, operand2)
+    except KeyError:
+        return "Feil i forespørsel: Mangler operand1, operand2 eller mangler/ugyldig operator.", 400
+    except ValueError:
+        return "Feil i forespørsel: operand1 og operand2 må kunne konverteres til heltall.", 400
 
+
+def _do_math(operator, operand1, operand2):
+    operations = {
+        'plus': "{0} + {1} = {2}".format(operand1, operand2, operand1 + operand2),
+        'minus': "{0} - {1} = {2}".format(operand1, operand2, operand1 - operand2),
+        'mult': "{0} * {1} = {2}".format(operand1, operand2, operand1 * operand2),
+        'div': "{0} / {1} = {2}".format(operand1, operand2, operand1 / operand2)
+    }
+    return operations[operator]
 
 if __name__ == '__main__':
     app.run()
