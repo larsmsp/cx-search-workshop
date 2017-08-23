@@ -10,7 +10,7 @@ Første oppgave skal gjøre studenten kjent med Python, web-rammeverket Flask og
 til Google App Engine Standard. Man skal lage et enkelt endepunkt som viser "Hello, World!" og en enkel kalkulator.
 
 1. Endre metoden `hello_world` til å returnere "Hello, World!". \
-Kan testes lokalt ved å kjøre `python main.py` og gå til [localhost:5000](http://localhost:5000) i nettleseren.
+Kan testes lokalt ved å kjøre `dev_appserver.py app.yaml` og gå til [localhost:8080](http://localhost:8080) i nettleseren.
 
 2. Fullfør metoden `calculator` til å gjøre riktig operasjon på operandene etter hvilken verdi `operator` har:
    * `plus`: Addere
@@ -18,8 +18,8 @@ Kan testes lokalt ved å kjøre `python main.py` og gå til [localhost:5000](htt
    * `mult`: Multiplisere
    * `div`: Divisjon
    
-   Kan testes lokalt ved å kjøre `python main.py` og gå til 
-   [localhost:5000?operand1=1&operand2=5&operator=plus](http://localhost:5000?operand1=1&operand2=5&operator=plus) 
+   Kan testes lokalt ved å kjøre `dev_appserver.py app.yaml` og gå til 
+   [localhost:8080?operand1=1&operand2=5&operator=plus](http://localhost:8080?operand1=1&operand2=5&operator=plus) 
    i nettleseren.
    
 3. Rulle ut versjonen til Google Cloud Platform.
