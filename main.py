@@ -2,6 +2,7 @@
 import logging
 
 from flask import Flask, request
+from google.appengine.api import search
 
 logging.basicConfig(format='[%(asctime)s] [%(levelname)s] %(message)s', datefmt='%Y-%m-%d %H:%M:%S')
 logging.getLogger().setLevel(logging.INFO)
@@ -44,6 +45,15 @@ def _do_math(operator, operand1, operand2):
         'div': "{0} / {1} = {2}".format(operand1, operand2, operand1 / operand2)
     }
     return operations[operator]
+
+
+@app.route('/search', methods=['GET'])
+def search():
+    """
+
+    :return: En liste av alle søkeresultater.
+    """
+    pass
 
 if __name__ == '__main__':
     app.run()
