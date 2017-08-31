@@ -1,7 +1,7 @@
 # coding=utf-8
 import logging
 
-from flask import Flask, request
+from flask import Flask, request, jsonify
 from google.appengine.api import search
 
 logging.basicConfig(format='[%(asctime)s] [%(levelname)s] %(message)s', datefmt='%Y-%m-%d %H:%M:%S')
@@ -53,7 +53,45 @@ def search():
 
     :return: En liste av alle søkeresultater.
     """
-    pass
+    return []
+
+
+class Document(object):
+    """
+    Hjelpeklasse for å søke etter dokumenter i indeksen.
+    Finn riktige verdier i Google Cloud Platform-konsollet og fyll inn.
+    """
+    _INDEX_NAME = '?'
+
+    ID = '?'
+    URL = '?'
+    TITLE = '?'
+    CONTENTS = '?'
+
+    @classmethod
+    def search(cls, query_string):
+        index = search_api.Index(cls._INDEX_NAME)
+        query_options = search_api.QueryOptions(
+            snippeted_fields=[Document.CONTENTS]
+        )
+        query = search_api.Query(query_string.strip(), query_options)
+        search_results = index.search(query)
+        final_results = []
+        for doc in search_results:
+            result = {
+                Document.ID: doc.doc_id
+            }
+            for field in doc.fields:
+                if field.name == Document.TITLE:
+                    result[Document.TITLE] = field.value
+                if field.name == Document.URL:
+                    result[Document.URL] = field.value
+            for expr in doc.expressions:
+                if expr.name == Document.CONTENTS:
+                    result[Document.CONTENTS] = expr.value
+                    break
+            final_results.append(result)
+        return final_results
 
 if __name__ == '__main__':
     app.run()
