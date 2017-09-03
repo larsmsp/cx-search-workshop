@@ -79,19 +79,43 @@ class Document(object):
         final_results = []
         for doc in search_results:
             result = {
-                Document.ID: doc.doc_id
+                Document.ID: '',
+                Document.TITLE: '',
+                Document.URL: '',
+                Document.CONTENTS: ''
             }
-            for field in doc.fields:
-                if field.name == Document.TITLE:
-                    result[Document.TITLE] = field.value
-                if field.name == Document.URL:
-                    result[Document.URL] = field.value
-            for expr in doc.expressions:
-                if expr.name == Document.CONTENTS:
-                    result[Document.CONTENTS] = expr.value
-                    break
-            final_results.append(result)
+            # Legg til i listen av resultater.
         return final_results
+
+    @classmethod
+    def get_id(cls, search_doc):
+        return search_doc.doc_id
+
+    @classmethod
+    def get_title(cls, search_doc):
+        return cls.get_document_field(search_doc, Document.TITLE)
+
+    @classmethod
+    def get_url(cls, search_doc):
+        return cls.get_document_field(search_doc, Document.URL)
+
+    @classmethod
+    def get_contents(cls, search_doc):
+        return cls.get_snippeted_field(search_doc, Document.CONTENTS)
+
+    @classmethod
+    def get_document_field(cls, search_doc, field_name):
+        for field in search_doc.fields:
+            if field.name == field_name:
+                return field.value
+        return ""
+
+    @classmethod
+    def get_snippeted_field(cls, search_doc, field_name):
+        for expr in search_doc.expressions:
+            if expr.name == field_name:
+                return expr.value
+        return ""
 
 if __name__ == '__main__':
     app.run()
