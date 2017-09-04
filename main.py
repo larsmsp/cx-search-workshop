@@ -50,7 +50,7 @@ def _do_math(operator, operand1, operand2):
 @app.route('/search', methods=['GET'])
 def search():
     """
-
+    Skal lese query-parameteret 'q' fra requests.args.
     :return: En liste av alle søkeresultater.
     """
     return []
