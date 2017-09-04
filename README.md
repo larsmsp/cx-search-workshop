@@ -28,5 +28,16 @@ Kan testes lokalt ved å kjøre `python main.py` og gå til [localhost:5000](htt
    
    Versjonen vil være synlig på `https://<ditt-servicenavn>-dot-sinuous-tine-156112.appspot.com`.
 
-## Søkemotor
+## Frontend til søkemotor
+
+I andre oppgave skal studenten rulle ut frontend til søkeapplikasjonen. Denne kan brukes for å teste søkeendepunktet som 
+lages i siste oppgave.
+
+1. Rulle ut versjonen til Google Cloud Platform.
+   * Endre service-navn i filen `app.yaml`
+   * Rulle ut ut ved å kjøre `gcloud app deploy` fra kommandolinjen
+   
+   Versjonen vil være synlig på `https://<ditt-servicenavn>-dot-sinuous-tine-156112.appspot.com`.
+   
+## Endepunkt for søk
 
