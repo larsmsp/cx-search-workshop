@@ -3,6 +3,16 @@ runtime: python27
 api_version: 1
 threadsafe: true
 
+skip_files:
+- frontend/node_modules
+
 handlers:
-- url: /.*
+- url: /static
+  static_dir: frontend/build/static
+
+- url: /.+
   script: main.app
+
+- url: /
+  static_files: frontend/build/index.html
+  upload: frontend/build/index.html
