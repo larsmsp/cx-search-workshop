@@ -26,7 +26,7 @@ Kan testes lokalt ved å kjøre `dev_appserver.py app.yaml` og gå til [localhos
    * Endre service-navn i filen `app.yaml`
    * Rulle ut ved å kjøre `gcloud app deploy` fra kommandolinjen
    
-   Versjonen vil være synlig på `https://<ditt-servicenavn>-dot-sinuous-tine-156112.appspot.com`.
+   Versjonen vil være synlig på `https://<ditt-servicenavn>-dot-computas-universitet.appspot.com`.
 
 ## Frontend til søkemotor
 
@@ -37,7 +37,7 @@ lages i siste oppgave.
    * Endre service-navn i filen `app.yaml`
    * Rulle ut ut ved å kjøre `gcloud app deploy` fra kommandolinjen
    
-   Versjonen vil være synlig på `https://<ditt-servicenavn>-dot-sinuous-tine-156112.appspot.com`.
+   Versjonen vil være synlig på `https://<ditt-servicenavn>-dot-computas-universitet.appspot.com`.
    
 ## Endepunkt for søk
 
@@ -57,5 +57,5 @@ f.eks. `www.minsøkemotor.com/search?q=Computas`.
 2. Rulle ut versjonen til Google Cloud Platform.
    * Endre service-navn i filen `app.yaml`
    * Rulle ut ut ved å kjøre `gcloud app deploy` fra kommandolinjen
-3. Test søkemotoren ved å gå til `https://<ditt-servicenavn>-dot-sinuous-tine-156112.appspot.com` og søke
+3. Test søkemotoren ved å gå til `https://<ditt-servicenavn>-dot-computas-universitet.appspot.com` og søke
 etter noe du tror eller vet står på hjemmesiden til Computas. 
