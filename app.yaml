@@ -1,4 +1,4 @@
-#service: search
+service: <your-service-name>
 runtime: python27
 api_version: 1
 threadsafe: true
