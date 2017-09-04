@@ -1,8 +1,7 @@
 # coding=utf-8
 import logging
 
-from flask import Flask, request, jsonify
-from google.appengine.api import search
+from flask import Flask, request
 
 logging.basicConfig(format='[%(asctime)s] [%(levelname)s] %(message)s', datefmt='%Y-%m-%d %H:%M:%S')
 logging.getLogger().setLevel(logging.INFO)
@@ -46,79 +45,6 @@ def _do_math(operator, operand1, operand2):
     }
     return operations[operator]
 
-
-@app.route('/search', methods=['GET'])
-def search():
-    """
-    Brukere skal kunne gå til adressen <din appengine-adresse>/search?q=<søkestring> og få en liste av
-    resultater tilbake. Listen skal returneres som JSON (JavaScript Object Notation).
-
-    For å konvertere mellom en liste i Python og JSON som Flask kan returnere, så kan man bruke metoden "jsonify".
-    :return: En liste av alle søkeresultater.
-    """
-    return []
-
-
-class Document(object):
-    """
-    Hjelpeklasse for å søke etter dokumenter i indeksen.
-    Finn riktige verdier i Google Cloud Platform-konsollet og fyll inn.
-    """
-    _INDEX_NAME = '?'
-
-    ID = '?'
-    URL = '?'
-    TITLE = '?'
-    CONTENTS = '?'
-
-    @classmethod
-    def search(cls, query_string):
-        index = search_api.Index(cls._INDEX_NAME)
-        query_options = search_api.QueryOptions(
-            snippeted_fields=[Document.CONTENTS]
-        )
-        query = search_api.Query(query_string.strip(), query_options)
-        search_results = index.search(query)
-        final_results = []
-        for doc in search_results:
-            result = {
-                Document.ID: '',
-                Document.TITLE: '',
-                Document.URL: '',
-                Document.CONTENTS: ''
-            }
-            # Legg til i listen av resultater.
-        return final_results
-
-    @classmethod
-    def get_id(cls, search_doc):
-        return search_doc.doc_id
-
-    @classmethod
-    def get_title(cls, search_doc):
-        return cls.get_document_field(search_doc, Document.TITLE)
-
-    @classmethod
-    def get_url(cls, search_doc):
-        return cls.get_document_field(search_doc, Document.URL)
-
-    @classmethod
-    def get_contents(cls, search_doc):
-        return cls.get_snippeted_field(search_doc, Document.CONTENTS)
-
-    @classmethod
-    def get_document_field(cls, search_doc, field_name):
-        for field in search_doc.fields:
-            if field.name == field_name:
-                return field.value
-        return ""
-
-    @classmethod
-    def get_snippeted_field(cls, search_doc, field_name):
-        for expr in search_doc.expressions:
-            if expr.name == field_name:
-                return expr.value
-        return ""
 
 if __name__ == '__main__':
     app.run()
