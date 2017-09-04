@@ -50,7 +50,10 @@ def _do_math(operator, operand1, operand2):
 @app.route('/search', methods=['GET'])
 def search():
     """
-    Skal lese query-parameteret 'q' fra requests.args.
+    Brukere skal kunne gå til adressen <din appengine-adresse>/search?q=<søkestring> og få en liste av
+    resultater tilbake. Listen skal returneres som JSON (JavaScript Object Notation).
+
+    For å konvertere mellom en liste i Python og JSON som Flask kan returnere, så kan man bruke metoden "jsonify".
     :return: En liste av alle søkeresultater.
     """
     return []
