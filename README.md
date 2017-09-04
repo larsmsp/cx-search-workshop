@@ -41,3 +41,21 @@ lages i siste oppgave.
    
 ## Endepunkt for søk
 
+Tredje oppgave skal knytte søkeindeksen i Google Cloud Platform til frontend. Studentene skal lage et
+søkeendepunkt som spør og henter resultat fra indeksen.
+
+Metoden skal ligge på endepunktet `/search`og lese query-parameteret `q`, 
+f.eks. `www.minsøkemotor.com/search?q=Computas`. 
+
+1. Skriv koden som leser query-parameteret `q`, henter resultatet fra Google Cloud Platform og returnerer det til brukeren.
+   * Query-parameter kan leses ved å kalle `request.args['parameter-navn]`
+   * Det finnes en hjelpeklasse `Document`som kan brukes for å utføre søk. Denne må derimot utvides noe:
+       * Feltene `ID`, `TITLE`, `URL` og `CONTENTS` må gis riktige verdier. 
+       Verdiene på disse er synlige i Google Cloud Platform-konsollet under App Engine\Search.
+       * `search`-metoden må endres slik at den kaller riktige metoder for å fylle inn søkeresultatene som
+       skal returneres.
+2. Rulle ut versjonen til Google Cloud Platform.
+   * Endre service-navn i filen `app.yaml`
+   * Rulle ut ut ved å kjøre `gcloud app deploy` fra kommandolinjen
+3. Test søkemotoren ved å gå til `https://<ditt-servicenavn>-dot-sinuous-tine-156112.appspot.com` og søke
+etter noe du tror eller vet står på hjemmesiden til Computas. 
