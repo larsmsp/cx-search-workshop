@@ -64,12 +64,12 @@ class Document(object):
     Hjelpeklasse for å søke etter dokumenter i indeksen.
     Finn riktige verdier i Google Cloud Platform-konsollet og fyll inn.
     """
-    _INDEX_NAME = '?'
+    _INDEX_NAME = 'computas-docs'
 
-    ID = '?'
-    URL = '?'
-    TITLE = '?'
-    CONTENTS = '?'
+    ID = 'id'
+    URL = 'url'
+    TITLE = 'title'
+    CONTENTS = 'contents'
 
     @classmethod
     def search(cls, query_string):
