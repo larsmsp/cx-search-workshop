@@ -2,7 +2,7 @@
 import logging
 
 from flask import Flask, request, jsonify
-from google.appengine.api import search
+from google.appengine.api import search as search_api
 
 logging.basicConfig(format='[%(asctime)s] [%(levelname)s] %(message)s', datefmt='%Y-%m-%d %H:%M:%S')
 logging.getLogger().setLevel(logging.INFO)
