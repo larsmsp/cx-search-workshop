@@ -5,6 +5,13 @@ threadsafe: true
 
 skip_files:
 - frontend/node_modules
+- frontend/public
+- frontend/semantic
+- frontend/src
+- frontend/package.json
+- frontend/README.md
+- frontend/semantic.json
+- frontend/yarn.lock
 
 handlers:
 - url: /static
