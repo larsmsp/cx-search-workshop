@@ -67,8 +67,8 @@ def index():
     :return:
     """
     my_index = '' # navnet på din indeks.
-    index = search.Index(my_index) # vil opprette indeksen hvis den ikke finnes.
-    document = search.Document(doc_id='',
+    index = search_api.Index(my_index) # vil opprette indeksen hvis den ikke finnes.
+    document = search_api.Document(doc_id='',
                                fields=[
                                    search.TextField(name='title', value=''),
                                    search.TextField(name='contents', value=''),
