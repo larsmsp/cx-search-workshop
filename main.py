@@ -56,6 +56,7 @@ def search():
     For å konvertere mellom en liste i Python og JSON som Flask kan returnere, så kan man bruke metoden "jsonify".
     :return: En liste av alle søkeresultater.
     """
+    results = []
     return ""
 
 
