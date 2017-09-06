@@ -10,7 +10,7 @@ logging.getLogger().setLevel(logging.INFO)
 app = Flask(__name__)
 
 
-@app.route('/', methods=['GET'])
+@app.route('/hello', methods=['GET'])
 def hello_world():
     """
     :return: "Hello, world!" til de som besøker siden. 
