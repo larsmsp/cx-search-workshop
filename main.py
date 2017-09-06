@@ -59,6 +59,21 @@ def search():
     return jsonify(Document.search(request.args['q']))
 
 
+@app.route('/index', methods=['GET'])
+def index():
+    """
+    Metode for å indeksere et dokument
+    :return:
+    """
+    my_index = ''
+    index = search.Index(my_index)
+    doc_id = ''
+    url = ''
+    title = ''
+    contents = ''
+
+
+
 class Document(object):
     """
     Hjelpeklasse for å søke etter dokumenter i indeksen.
