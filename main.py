@@ -62,16 +62,21 @@ def search():
 @app.route('/index', methods=['GET'])
 def index():
     """
-    Metode for å indeksere et dokument
+    Metode for å indeksere et dokument.
+    Skal lese inn id, title, url og contents fra query-parametere.
     :return:
     """
-    my_index = ''
-    index = search.Index(my_index)
-    doc_id = ''
-    url = ''
-    title = ''
-    contents = ''
-
+    my_index = '' # navnet på din indeks.
+    index = search.Index(my_index) # vil opprette indeksen hvis den ikke finnes.
+    document = search.Document(doc_id='',
+                               fields=[
+                                   search.TextField(name='title', value=''),
+                                   search.TextField(name='contents', value=''),
+                                   search.TextField(name='url', value='')
+                               ])
+    results = index.put(document)
+    document_ids = [d.id for d in results]
+    return "Added documents: {0}".format(', '.join(document_ids))
 
 
 class Document(object):
@@ -95,11 +100,11 @@ class Document(object):
         query = search_api.Query(query_string.strip(), query_options)
         search_results = index.search(query)
         final_results = [{
-                Document.ID: cls.get_id(doc),
-                Document.TITLE: cls.get_title(doc),
-                Document.URL: cls.get_url(doc),
-                Document.CONTENTS: cls.get_contents(doc)
-            } for doc in search_results]
+            Document.ID: cls.get_id(doc),
+            Document.TITLE: cls.get_title(doc),
+            Document.URL: cls.get_url(doc),
+            Document.CONTENTS: cls.get_contents(doc)
+        } for doc in search_results]
         return final_results
 
     @classmethod
