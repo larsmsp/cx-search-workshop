@@ -59,21 +59,15 @@ def search():
     return jsonify(Document.search(request.args['q']))
 
 
-@app.route('/index', methods=['GET'])
 def index():
     """
     Metode for å indeksere et dokument.
     Skal lese inn id, title, url og contents fra query-parametere.
     :return:
     """
-    my_index = '' # navnet på din indeks.
-    index = search_api.Index(my_index) # vil opprette indeksen hvis den ikke finnes.
-    document = search_api.Document(doc_id='',
-                               fields=[
-                                   search.TextField(name='title', value=''),
-                                   search.TextField(name='contents', value=''),
-                                   search.TextField(name='url', value='')
-                               ])
+    my_index = ''  # navnet på din indeks.
+    index = search_api.Index(my_index)  # vil opprette indeksen hvis den ikke finnes.
+    document = ''  # hente ut title, contents og url og opprette dokument.
     results = index.put(document)
     document_ids = [d.id for d in results]
     return "Added documents: {0}".format(', '.join(document_ids))
@@ -136,6 +130,16 @@ class Document(object):
             if expr.name == field_name:
                 return expr.value
         return ""
+
+
+    @classmethod
+    def create(cls, title, contents, url):
+        return search_api.Document(doc_id='',
+                                   fields=[
+                                       search.TextField(name='title', value=''),
+                                       search.TextField(name='contents', value=''),
+                                       search.TextField(name='url', value='')
+                                   ])
 
 
 if __name__ == '__main__':
