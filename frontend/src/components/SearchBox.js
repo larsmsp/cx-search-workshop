@@ -8,7 +8,13 @@ export default class SearchBox extends Component {
         this.resetComponent()
     }
 
-    resetComponent = () => this.setState({ isActive: false, results: [], query: '', endpoint: '' })
+    resetComponent = () => this.setState({ isActive: false,
+        results: [],
+        query: '',
+        endpoint: '',
+        title: '',
+        contents: '',
+        url: ''})
 
     handleSearchResponse = (json) => {
         this.setState({
@@ -51,6 +57,18 @@ export default class SearchBox extends Component {
         this.setState({ query: data.value })
     }
 
+    handleTitleChange = (e, data) => {
+        this.setState({ title: data.value })
+    }
+
+    handleContentsChange = (e, data) => {
+        this.setState({ contents: data.value })
+    }
+
+    handleURLChange = (e, data) => {
+        this.setState({ url: data.value })
+    }
+
     render() {
         const { results, isActive } = this.state
 
@@ -59,6 +77,18 @@ export default class SearchBox extends Component {
                 <Grid.Row>
                     <Input label={'Query'} onChange={this.handleQueryChange} size={'large'} />
                     <Button primary content={'Search'} size={'large'} onClick={this.handleSearchChange} />
+                </Grid.Row>
+                <Grid.Row>
+                    <Input label={'Title'} onChange={this.handleTitleChange} size={'large'} />
+                </Grid.Row>
+                <Grid.Row>
+                    <Input label={'Contents'} onChange={this.handleContentsChange} size={'large'} />
+                </Grid.Row>
+                <Grid.Row>
+                    <Input label={'URL'} onChange={this.handleURLChange} size={'large'} />
+                </Grid.Row>
+                <Grid.Row>
+                    <Button primary content={'Insert'} size={'large'} onClick={this.handleSearchChange} />
                 </Grid.Row>
                 <Grid.Row>
                     <Loader content={'Searching...'} active={isActive} size={'huge'} />
