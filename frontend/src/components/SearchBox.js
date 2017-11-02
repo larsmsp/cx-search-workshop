@@ -69,6 +69,30 @@ export default class SearchBox extends Component {
         this.setState({ url: data.value })
     }
 
+    handleInsert = (e, value) => {
+        this.setState({ isActive: true, value })
+
+        setTimeout(() => {
+                fetch(`/index`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        url: this.state.url,
+                        title: this.state.title,
+                        contents: this.state.contents
+                    })
+                }).then(function(response) {
+                    if (response.ok) {
+                        return response.json()
+                    }
+                    throw Error(response.status.toString())
+                }).then((json) => this.handleSearchResponse(json))
+                    .catch((err) => this.handleSearchError(err))
+            }, 1)
+    }
+
     render() {
         const { results, isActive } = this.state
 
@@ -88,10 +112,10 @@ export default class SearchBox extends Component {
                     <Input label={'URL'} onChange={this.handleURLChange} size={'large'} />
                 </Grid.Row>
                 <Grid.Row>
-                    <Button primary content={'Insert'} size={'large'} onClick={this.handleSearchChange} />
+                    <Button primary content={'Insert'} size={'large'} onClick={this.handleInsert} />
                 </Grid.Row>
                 <Grid.Row>
-                    <Loader content={'Searching...'} active={isActive} size={'huge'} />
+                    <Loader content={'Working...'} active={isActive} size={'huge'} />
                     <SearchResults results={results} />
                 </Grid.Row>
             </Grid>
